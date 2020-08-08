@@ -14,20 +14,21 @@ steps:
 
   - task: TerraformCLI@0
     inputs:
-      command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/azure/'
-      backendType: 'azurerm'
-      backendServiceArm: 'gvr-azure-rm service-conn'
+      command: "init"
+      workingDirectory: "$(System.DefaultWorkingDirectory)/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/azure/"
+      commandOptions: "-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)"
+      backendType: "azurerm"
+      backendServiceArm: "gvr-azure-rm service-conn"
       ensureBackend: true
-      backendAzureRmResourceGroupName: 'terraform-backend-rg'
-      backendAzureRmResourceGroupLocation: 'eastus'
-      backendAzureRmStorageAccountName: 'storageacctrangaxyz'
-      backendAzureRmContainerName: 'storageacctrangacontainer'
-      backendAzureRmKey: 'kubernetes-dev.tfstate'
+      backendAzureRmResourceGroupName: "terraform-backend-rg"
+      backendAzureRmResourceGroupLocation: "eastus"
+      backendAzureRmStorageAccountName: "storageacctrangaxyz"
+      backendAzureRmContainerName: "storageacctrangacontainer"
+      backendAzureRmKey: "kubernetes-dev.tfstate"
 
   - task: TerraformCLI@0
     inputs:
-      command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/azure/'
-      environmentServiceName: 'gvr-azure-rm service-conn'
-      commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+      command: "apply"
+      workingDirectory: "$(System.DefaultWorkingDirectory)/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/azure/"
+      environmentServiceName: "gvr-azure-rm service-conn"
+      commandOptions: "-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)"
