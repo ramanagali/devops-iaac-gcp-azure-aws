@@ -25,10 +25,3 @@ steps:
       backendAzureRmStorageAccountName: "storageacctrangaxyz"
       backendAzureRmContainerName: "storageacctrangacontainer"
       backendAzureRmKey: "kubernetes-dev.tfstate"
-
-  - task: TerraformCLI@0
-    inputs:
-      command: "apply"
-      workingDirectory: "$(System.DefaultWorkingDirectory)/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/azure/"
-      environmentServiceName: "gvr-azure-rm service-conn"
-      commandOptions: "-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)"
